@@ -6,7 +6,7 @@ void setup() {
   Serial.println("\r\nESPino32CAM");
   if (cam.init() != ESP_OK)
   {
-    Serial.println(F("Fail"));
+    cam.printDebug(F("Init Fail"));
     while (1);
   }
   sensor_t *s = cam.sensor();
@@ -15,7 +15,7 @@ void setup() {
 
 void loop()
 {
-  pv_time = millis();
+  unsigned long pv_time  = millis();
   camera_fb_t *fb = cam.capture();
   if (!fb)
   {
