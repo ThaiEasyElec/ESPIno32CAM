@@ -32,7 +32,7 @@ void loop()
     return;
   }
   dl_matrix3du_t *rgb888;
-  if (cam.jpg2rgb888(fb, &rgb888))
+  if (cam.jpg2rgb(fb,&rgb888))
   {
     cam.clearMemory(fb);
     box_array_t *net_boxes = cam.faceDetect(rgb888, &mtmn_config);
@@ -56,11 +56,8 @@ void loop()
   }
   uint8_t *jpgout;
   size_t  jpglen;
-  bool s = fmt2jpg(rgb888->item, rgb888->w * rgb888->h * 3, rgb888->w, rgb888->h, PIXFORMAT_RGB888, 90, &jpgout, &jpglen);
-  if (s)
-  {
+  if (cam.rgb2jpg(rgb888,&jpgout, &jpglen))
     Serial.write(jpgout, jpglen);
-  }
   cam.clearMemory(jpgout);
   cam.clearMemory(rgb888);
 }

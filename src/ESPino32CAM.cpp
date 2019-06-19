@@ -49,7 +49,7 @@ sensor_t * ESPino32CAM::sensor()
 {
 	return  esp_camera_sensor_get();
 }
-bool ESPino32CAM::jpg2rgb888(camera_fb_t *fb, dl_matrix3du_t **image_matrix)
+bool ESPino32CAM::jpg2rgb(camera_fb_t *fb, dl_matrix3du_t **image_matrix)
 {
 	*image_matrix = dl_matrix3du_alloc(1, fb->width, fb->height, 3);
 	if (!*image_matrix)
@@ -65,6 +65,11 @@ bool ESPino32CAM::jpg2rgb888(camera_fb_t *fb, dl_matrix3du_t **image_matrix)
 		return false;
 	}
 	return true;
+}
+bool ESPino32CAM::rgb2jpg(dl_matrix3du_t *rgb888, uint8_t **jpg,size_t *len)
+{
+	 bool s = fmt2jpg(rgb888->item, rgb888->w * rgb888->h * 3, rgb888->w, rgb888->h, PIXFORMAT_RGB888, 90, jpg, len);
+	 return s;
 }
 dl_matrix3du_t * ESPino32CAM::rgb565(dl_matrix3du_t *image)
 {

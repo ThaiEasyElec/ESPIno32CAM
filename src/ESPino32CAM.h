@@ -57,7 +57,8 @@ public:
 	camera_config_t config;
 	camera_fb_t *capture();
 	sensor_t * sensor();
-	bool jpg2rgb888(camera_fb_t *fb, dl_matrix3du_t **image_matrix);
+	bool jpg2rgb(camera_fb_t *fb, dl_matrix3du_t **image_matrix);
+	bool rgb2jpg(dl_matrix3du_t *rgb888, uint8_t **jpg,size_t *len);
 	dl_matrix3du_t *rgb565(dl_matrix3du_t *image);
 	size_t grayScale(dl_matrix3du_t *image_888,dl_matrix3du_t **gray);
 	box_array_t *faceDetect(dl_matrix3du_t *image_matrix,mtmn_config_t *config);
