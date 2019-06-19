@@ -1,7 +1,7 @@
 #include "ESPino32CAM.h"
 ESPino32CAM cam;
 void setup() {
-  Serial.begin(1000000);
+  Serial.begin(2000000);
   Serial.println("\r\nESPino32CAM");
   if (cam.init() != ESP_OK)
   {
