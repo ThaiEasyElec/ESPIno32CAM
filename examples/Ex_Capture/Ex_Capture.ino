@@ -1,6 +1,5 @@
 #include "ESPino32CAM.h"
 ESPino32CAM cam;
-unsigned long pv_time = 0;
 void setup() {
   Serial.begin(1000000);
   Serial.println("\r\nESPino32CAM");
