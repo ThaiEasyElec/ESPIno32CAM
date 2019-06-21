@@ -1,4 +1,4 @@
-#include "QRCode.h"
+#include "ESPino32CAM_QRCode.h"
 #include "esp_task_wdt.h"
 
 SemaphoreHandle_t ready_;
