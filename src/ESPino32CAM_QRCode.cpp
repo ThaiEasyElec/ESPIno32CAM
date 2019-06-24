@@ -11,7 +11,6 @@ ESPino32QRCode::ESPino32QRCode()
 	xHandle = NULL;
 }
 
-
 void ESPino32QRCode::init(ESPino32CAM *cam)
 {
 	cam_ = *cam;
