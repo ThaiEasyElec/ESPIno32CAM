@@ -14,7 +14,7 @@
 
 
 // Config Camera Pin 
-#define PWDN_GPIO_NUM     -1
+#define PWDN_GPIO_NUM     -1 
 #define RESET_GPIO_NUM     4
 #define XCLK_GPIO_NUM      13
 #define SIOD_GPIO_NUM     21
