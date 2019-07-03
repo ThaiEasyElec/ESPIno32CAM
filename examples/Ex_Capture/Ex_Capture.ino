@@ -23,5 +23,5 @@ void loop()
   }
   Serial.write(fb->buf, fb->len);
   cam.printfDebug("Frame %d Per Second",1000/(millis()-pv_time));
-  esp_camera_fb_return(fb);
+  cam.clearMemory(fb);
 }

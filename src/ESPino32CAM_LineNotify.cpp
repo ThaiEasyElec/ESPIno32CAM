@@ -37,6 +37,7 @@ lineResp LineNotify::waitResponse()
 		return(ret);
 	}
 	unsigned long old_t = millis();
+	//Serial.println("Wait Resp");
 	while(lineClient.connected()) 
 	{
 		String line = lineClient.readStringUntil('\n');
@@ -80,15 +81,17 @@ lineResp LineNotify::waitResponse()
 		}
 		if(line.indexOf(F("}"))!=-1)
 		{
-			ret.response += line+"}\r\n";
+			ret.response += line+"\r\n";
 			break;
 		}
 		if((millis()-old_t)>5000)
 		{
+			//Serial.println("Response Timeout");
 			ret.response="Timeout";
 			break;
 		}
 	}
+  //Serial.println("Close Socket");
   lineClient.stop();
   return(ret);
 }

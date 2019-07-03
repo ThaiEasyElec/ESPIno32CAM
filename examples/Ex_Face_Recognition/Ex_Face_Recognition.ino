@@ -6,9 +6,7 @@ bool is_enrolling = false;
 static face_id_list id_list = {0};
 void setup() {
   Serial.begin(2000000);
-  cam.printDebug("\r\nESPino32CAM");
-  
-    
+  cam.printDebug("\r\nESPino32CAM");  
   if (cam.init() != ESP_OK)
   {
     cam.printDebug(F("Fail"));

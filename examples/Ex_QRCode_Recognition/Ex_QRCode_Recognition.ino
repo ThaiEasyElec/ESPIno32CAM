@@ -45,9 +45,7 @@ void loop()
        }
        else
           cam.printDebug("FAIL");
-       
      }
   }
   cam.clearMemory(image_rgb);  
-
 }

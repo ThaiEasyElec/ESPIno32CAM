@@ -2,11 +2,10 @@
 #include "ESPino32CAM_LineNotify.h"
 const char* ssid     = ""; 
 const char* password = "";
-String key = "";
+String token = "";
 ESPino32CAM cam;
 LineNotify line;
 #define Button 0
-uint8_t buttoncnt=0;
 void setup() {
   Serial.begin(115200);
   Serial.println("\r\nESPino32CAM");
@@ -27,7 +26,7 @@ void setup() {
     delay(1000);
   }
   Serial.println("\r\nConnected");
-  line.authenKey(key);
+  line.authenKey(token);
   line.setUTC(7);
 }
 void loop()
@@ -37,39 +36,12 @@ void loop()
   if(!digitalRead(Button))
   {
     lineResp ret;
-    buttoncnt++;
-    switch(buttoncnt)
-    {
-      case 1:
-            msg = "ทดสอบ ส่งข้อความจาก ESPIno32CAM";
-            Serial.println("Send Message : "+msg);
-            ret = line.message(msg);
-          break;
-      case 2:
-            msg = "ทดสอบ ส่งข้อความจาก และ สติ๊กเกอร์ ด้วย ESPIno32CAM";
-            Serial.println("Send Message and Sticker: "+msg);
-            ret = line.sticker(msg,1,4);
-          break;
-      case 3:
-            msg = "ทดสอบ ส่งข้อความจาก และ รูปภาพจากกล้อง ESPIno32CAM";
-            Serial.println("Send Message and Image: "+msg);
-            Serial.println("Capture");
-            fb = cam.capture();
-            ret = line.image(msg,fb->buf, fb->len);
-            esp_camera_fb_return(fb);
-          break;
-      case 4:
-            msg = "ทดสอบ ส่งข้อความจาก สติ๊กเกอร์ และ รูปภาพจากกล้อง ESPIno32CAM";
-            Serial.println("Send Message,Sticker and Image: "+msg);
-            Serial.println("Capture");
-            fb = cam.capture();
-            ret = line.send(msg,4,275,fb->buf, fb->len);
-            esp_camera_fb_return(fb);
-          break;
-     default:
-          buttoncnt=0;
-          break;
-    }
+    msg = "ทดสอบ ส่งข้อความ สติ๊กเกอร์ และ รูปภาพจากกล้อง ESPIno32CAM";
+    Serial.println("Send Message,Sticker and Image: "+msg);
+    Serial.println("Capture");
+    fb = cam.capture();
+    ret = line.send(msg,4,275,fb->buf, fb->len);
+	cam.clearMemory(fb);
     if(ret.status)
     {
       Serial.printf("API Called %d/%d per hour\r\n",ret.remaining,ret.limit);

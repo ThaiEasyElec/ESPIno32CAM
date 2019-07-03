@@ -1,7 +1,6 @@
 #include "ESPino32CAM.h"
 ESPino32CAM cam;
 static mtmn_config_t mtmn_config = {0};
-unsigned long pv_time = 0;
 void setup() {
   Serial.begin(2000000);
   Serial.println("\r\nESPino32CAM");
