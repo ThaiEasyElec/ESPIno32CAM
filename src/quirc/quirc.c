@@ -26,7 +26,7 @@ const char *quirc_version(void)
 
 struct quirc *quirc_new(void)
 {
-	struct quirc *q = ps_malloc(sizeof(*q));
+	struct quirc *q = malloc(sizeof(*q));
 
 	if (!q)
 		return NULL;
@@ -65,7 +65,7 @@ int quirc_resize(struct quirc *q, int w, int h)
 	 * alloc a new buffer for q->image. We avoid realloc(3) because we want
 	 * on failure to be leave `q` in a consistant, unmodified state.
 	 */
-	image = ps_calloc(w, h);
+	image = calloc(w, h);
 	if (!image)
 		goto fail;
 
@@ -84,13 +84,13 @@ int quirc_resize(struct quirc *q, int w, int h)
 
 	/* alloc a new buffer for q->pixels if needed */
 	if (sizeof(*q->image) != sizeof(*q->pixels)) {
-		pixels = ps_calloc(newdim, sizeof(quirc_pixel_t));
+		pixels = calloc(newdim, sizeof(quirc_pixel_t));
 		if (!pixels)
 			goto fail;
 	}
 
 	/* alloc a new buffer for q->row_average */
-	row_average = ps_calloc(w, sizeof(int));
+	row_average = calloc(w, sizeof(int));
 	if (!row_average)
 		goto fail;
 
